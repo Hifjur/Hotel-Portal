@@ -66,7 +66,7 @@ const Hotel = ({ hotel }) => {
           </CardContent>
         </CardActionArea>
         <CardActions style={{ alignItems: "center" }}>
-          <NavLink style={{ textDecoration: "none" }} to={`/purchase/${_id}`}>
+          <NavLink style={{ textDecoration: "none" }} to={`/book/${_id}`}>
             <Button
               sx={{ backgroundColor: "#F27D42" }}
               variant="contained"

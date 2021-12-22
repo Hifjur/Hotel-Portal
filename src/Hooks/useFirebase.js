@@ -113,7 +113,7 @@ const useFirebase = () => {
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
     console.log(user);
-    fetch("https://shrouded-tor-90105.herokuapp.com/users", {
+    fetch("http://localhost:5000/users", {
       method: method,
       headers: {
         "content-type": "application/json",
