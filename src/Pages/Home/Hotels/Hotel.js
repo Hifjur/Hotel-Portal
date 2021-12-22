@@ -23,7 +23,7 @@ const Hotel = ({ hotel }) => {
           maxWidth: 400,
           backgroundColor: "#1D2440",
           border: 1,
-          borderColor: "#F27D42",
+          borderColor: "white",
         }}
       >
         <CardActionArea>

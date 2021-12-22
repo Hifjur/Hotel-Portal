@@ -40,7 +40,7 @@ const NavigationBar = () => {
               sx={{
                 m: 2,
                 display: { xs: "none", md: "inline" },
-                backgroundColor: "rgb(35, 34, 34)",
+                backgroundColor: "#1D2440",
                 color: "#D3BDBD",
               }}
               variant="contained"
@@ -56,7 +56,7 @@ const NavigationBar = () => {
               display: { xs: "none", md: "inline" },
               m: 2,
               flexGrow: 1,
-              color: "rgb(35, 34, 34)",
+              color: "#1D2440",
             }}
           >
             Bikers Corner
@@ -75,7 +75,7 @@ const NavigationBar = () => {
               sx={{
                 m: 2,
                 display: { xs: "none", md: "inline" },
-                backgroundColor: "rgb(35, 34, 34)",
+                backgroundColor: "#1D2440",
                 color: "#D3BDBD",
               }}
               variant="contained"
@@ -100,7 +100,7 @@ const NavigationBar = () => {
                   sx={{
                     m: 2,
                     display: { xs: "none", md: "inline" },
-                    backgroundColor: "rgb(35, 34, 34)",
+                    backgroundColor: "#1D2440",
                     color: "#D3BDBD",
                   }}
                   variant="contained"
@@ -114,7 +114,7 @@ const NavigationBar = () => {
                 sx={{
                   m: 2,
                   display: { xs: "none", md: "inline" },
-                  backgroundColor: "rgb(35, 34, 34)",
+                  backgroundColor: "#1D2440",
                   color: "#D3BDBD",
                 }}
                 variant="contained"
@@ -128,7 +128,7 @@ const NavigationBar = () => {
                 sx={{
                   m: 2,
                   display: { xs: "inline", md: "inline" },
-                  backgroundColor: "#C54B47",
+                  backgroundColor: "#F27D42",
                   borderBottom: "3px solid white",
                   borderRadius: "10px",
                   padding: "9px",

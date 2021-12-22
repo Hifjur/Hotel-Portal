@@ -8,11 +8,13 @@ import {
   ImageList,
   ImageListItem,
 } from "@mui/material";
+import { width } from "@mui/system";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import NavigationBar from "../../Shared/NavigationBar/NavigationBar";
 
 const Book = () => {
   const { id } = useParams();
@@ -92,140 +94,164 @@ const Book = () => {
     e.preventDefault();
   };
   return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <ImageList
-            sx={{ width: "100%", height: 550 }}
-            variant="woven"
-            cols={4}
-            gap={8}
+    <>
+      <NavigationBar />
+      <Container>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            xs={12}
+            style={{
+              padding: 10,
+              borderRadius: 5,
+              width: "100%",
+            }}
           >
-            {imageList.map((item) => (
-              <ImageListItem key={item.img}>
-                <img
-                  src={`${item.img}?w=161&fit=crop&auto=format`}
-                  srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-          </ImageList>
+            <ImageList
+              sx={{ width: "100%", height: 400 }}
+              variant="woven"
+              cols={4}
+              gap={8}
+            >
+              {imageList.map((item) => (
+                <ImageListItem key={item.img}>
+                  <img
+                    src={`${item.img}?w=161&fit=crop&auto=format`}
+                    srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </Grid>
         </Grid>
-      </Grid>
 
-      <Typography
-        sx={{ color: "white", fontWeight: "700" }}
-        gutterBottom
-        variant="h3"
-        component="div"
-      >
-        {name}
-      </Typography>
-      <Typography
-        sx={{ color: "#C54B47", fontWeight: "medium" }}
-        variant="body2"
-        color="text.secondary"
-      >
-        {location}
-      </Typography>
-      <Typography
-        sx={{ color: "#1D2440", fontWeight: "medium", fontSize: "30px" }}
-        variant="body2"
-        color="text.secondary"
-      >
-        Rent: ${rent}
-      </Typography>
-      <Typography
-        sx={{ color: "white", paddingTop: 5, fontWeight: "700" }}
-        gutterBottom
-        variant="h5"
-        component="div"
-      >
-        Enter Deails to Book A room
-      </Typography>
-      {bookingComplete && <Alert severity="success">Booking Successful</Alert>}
-
-      <form
-        style={{
-          paddingTop: "20px",
-          borderRadius: "30px",
-        }}
-        onSubmit={handleOrderConfirmation}
-      >
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="customerName"
-          onBlur={handleOnBlur}
-          label="Name"
-          defaultValue={user.displayName}
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="email"
-          onBlur={handleOnBlur}
-          label="Email"
-          defaultValue={user.email}
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="phone"
-          onBlur={handleOnBlur}
-          label="Phone Number"
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="road"
-          onBlur={handleOnBlur}
-          label="Road Number"
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="PO"
-          onBlur={handleOnBlur}
-          label="Postal code"
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-        <TextField
-          sx={{ width: "70%", m: 1 }}
-          name="city"
-          onBlur={handleOnBlur}
-          label="City"
-          id="filled-basic"
-          variant="filled"
-          size="small"
-        />
-        <br />
-        <Button
-          sx={{ backgroundColor: "#F27D42", m: 1 }}
-          type="submit"
-          variant="contained"
+        <Typography
+          sx={{ color: "white", fontWeight: "700" }}
+          gutterBottom
+          variant="h3"
+          component="div"
         >
-          Payment
-        </Button>
-      </form>
-      <NavLink style={{ textDecoration: "none" }} to="/">
-        <Button sx={{ margin: "20px" }} variant="outlined">
-          Look at more hotels
-        </Button>
-      </NavLink>
-    </Container>
+          {name}
+        </Typography>
+        <Typography
+          sx={{ color: "#F27D42", fontWeight: "medium" }}
+          variant="body2"
+          color="text.secondary"
+        >
+          {location}
+        </Typography>
+        <Typography
+          sx={{ color: "#1D2440", fontWeight: "medium", fontSize: "30px" }}
+          variant="body2"
+          color="text.secondary"
+        >
+          Rent: ${rent}
+        </Typography>
+        <Typography
+          sx={{ color: "white", paddingTop: 5, fontWeight: "700" }}
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
+          Enter Deails to Book A room
+        </Typography>
+        {bookingComplete && (
+          <Alert severity="success">Booking Successful</Alert>
+        )}
+
+        <form
+          style={{
+            paddingTop: "20px",
+            borderRadius: "30px",
+          }}
+          onSubmit={handleOrderConfirmation}
+        >
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="customerName"
+            onBlur={handleOnBlur}
+            label="Name"
+            defaultValue={user.displayName}
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="email"
+            onBlur={handleOnBlur}
+            label="Email"
+            defaultValue={user.email}
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="phone"
+            onBlur={handleOnBlur}
+            label="Phone Number"
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="road"
+            onBlur={handleOnBlur}
+            label="Road Number"
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="PO"
+            onBlur={handleOnBlur}
+            label="Postal code"
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="city"
+            onBlur={handleOnBlur}
+            label="City"
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            disabled
+            sx={{ width: "70%", m: 1 }}
+            name="status"
+            onBlur={handleOnBlur}
+            label="Booking Status"
+            id="filled-basic"
+            variant="filled"
+            size="small"
+            defaultValue="pending"
+          />
+          <br />
+          <Button
+            sx={{ backgroundColor: "#F27D42", m: 1 }}
+            type="submit"
+            variant="contained"
+          >
+            Payment
+          </Button>
+        </form>
+        <NavLink style={{ textDecoration: "none" }} to="/">
+          <Button sx={{ margin: "20px" }} variant="outlined">
+            Look at more hotels
+          </Button>
+        </NavLink>
+      </Container>
+    </>
   );
 };
 

@@ -1,60 +1,37 @@
-import { Button, Table, TableContainer, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useAuth from "../../../../Hooks/useAuth";
-
+import useAuth from "../../../Hooks/useAuth";
+import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-
+import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { NavLink } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
 import { Box } from "@mui/system";
 
-const ManageAllOrders = () => {
-  const { token } = useAuth();
-  const [allOrders, setAllOrders] = useState([]);
+const AllBookings = () => {
+  const { user, token } = useAuth();
+  const [Bookings, setBookings] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/bookings/admin", {
+    const url = `http://localhost:5000/bookings?email=${user.email}`;
+    fetch(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setAllOrders(data);
-      });
-  }, [token, success]);
-
-  const handleShipping = (orderId) => {
-    setSucsess(false);
-    const id = { orderId };
-    fetch("http://localhost:5000/bookings/admin", {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(id),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          setSucsess(true);
-          console.log(data);
-        }
-      });
-  };
+      .then((data) => setBookings(data));
+  }, [user.email, token, success]);
 
   const handleDelete = (orderId) => {
     setSucsess(false);
     const id = { orderId };
     if (
-      window.confirm(
-        "Are you sure you want to delete this Order from database?"
-      )
+      window.confirm("Are you sure you want to delete this bike from database?")
     ) {
       const url = `http://localhost:5000/bookings`;
       fetch(url, {
@@ -78,7 +55,7 @@ const ManageAllOrders = () => {
     }
   };
   return (
-    <div>
+    <>
       <Typography
         variant="h1"
         sx={{
@@ -89,23 +66,24 @@ const ManageAllOrders = () => {
           backgroundColor: "#1D2440",
         }}
       >
-        MANAGE ALL Bookings
+        ORDERS
       </Typography>
       <Box sx={{ width: "100%", display: { xs: "none", md: "block" } }}>
         <TableContainer component={Paper}>
-          <Table sx={{}} aria-label="Appointments List">
+          <Table aria-label=" List">
             <TableHead>
               <TableRow>
-                <TableCell>Custormer</TableCell>
-                <TableCell align="right">Hotel Preview</TableCell>
-                <TableCell align="right">Name</TableCell>
+                <TableCell>Custormer's Name</TableCell>
+                <TableCell align="right">Product Preview</TableCell>
+                <TableCell align="right">Products</TableCell>
+                <TableCell align="right">Price</TableCell>
                 <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Confirm</TableCell>
+                <TableCell align="right">Payment</TableCell>
                 <TableCell align="right">Cancle</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {allOrders.map((row) => (
+              {Bookings.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -116,8 +94,8 @@ const ManageAllOrders = () => {
                     </span>{" "}
                     <br />
                     <span style={{ color: "green" }}>
-                      Address: {row.road} {row.PO} <br /> {row.city} <br />{" "}
-                      Phone: {row.phone}
+                      Address: {row.road} {row.PO} <br />
+                      {row.city}
                     </span>
                   </TableCell>
                   <TableCell align="right">
@@ -132,15 +110,17 @@ const ManageAllOrders = () => {
                     />
                   </TableCell>
                   <TableCell align="right">{row.productName}</TableCell>
+                  <TableCell align="right">{row.price}</TableCell>
                   <TableCell align="right">{row.status}</TableCell>
                   <TableCell align="right">
-                    <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
-                      sx={{ backgroundColor: "#F27D42", m: 1 }}
-                      variant="contained"
-                    >
-                      Mark as shipped
-                    </Button>
+                    <NavLink style={{ textDecoration: "none" }} to="/payment">
+                      <Button
+                        sx={{ backgroundColor: "#F27D42", m: 1 }}
+                        variant="contained"
+                      >
+                        Payment
+                      </Button>
+                    </NavLink>
                   </TableCell>
                   <TableCell align="right">
                     <Button
@@ -161,7 +141,7 @@ const ManageAllOrders = () => {
         <TableContainer component={Paper}>
           <Table aria-label=" List">
             <TableBody>
-              {allOrders.map((row) => (
+              {Bookings.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{
@@ -204,7 +184,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Hotel Preview
+                      Product Preview
                     </span>{" "}
                     <br />{" "}
                     <img
@@ -225,7 +205,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Name:
+                      Products:
                     </span>
                     <span
                       style={{
@@ -245,7 +225,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Rent:
+                      Price:
                     </span>
                     <span
                       style={{
@@ -278,13 +258,14 @@ const ManageAllOrders = () => {
                     </span>
                   </TableCell>
                   <TableCell align="center">
-                    <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
-                      sx={{ backgroundColor: "#F27D42", m: 1 }}
-                      variant="contained"
-                    >
-                      Mark as shipped
-                    </Button>
+                    <NavLink style={{ textDecoration: "none" }} to="/payment">
+                      <Button
+                        sx={{ backgroundColor: "#F27D42", m: 1 }}
+                        variant="contained"
+                      >
+                        Payment
+                      </Button>
+                    </NavLink>
                     <Button
                       onClick={() => handleDelete(row.orderId)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
@@ -299,8 +280,8 @@ const ManageAllOrders = () => {
           </Table>
         </TableContainer>
       </Box>
-    </div>
+    </>
   );
 };
 
-export default ManageAllOrders;
+export default AllBookings;

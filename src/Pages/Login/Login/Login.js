@@ -61,7 +61,7 @@ const Login = () => {
             />
             <br />
             <Button
-              sx={{ backgroundColor: "#C54B47", color: "whtie", width: "75%" }}
+              sx={{ backgroundColor: "#F27D42", color: "whtie", width: "75%" }}
               type="submit"
               color="inherit"
             >
@@ -100,7 +100,7 @@ const Login = () => {
               sx={{
                 marginY: 2,
                 padding: 2,
-                backgroundColor: "#C54B47",
+                backgroundColor: "#F27D42",
                 color: "whtie",
               }}
               color="inherit"

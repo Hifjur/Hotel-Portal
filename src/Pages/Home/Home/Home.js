@@ -1,4 +1,6 @@
 import React from "react";
+import NavigationBar from "../../Shared/NavigationBar/NavigationBar";
+
 import Hotels from "../Hotels/Hotels";
 
 const style = {
@@ -8,6 +10,7 @@ const style = {
 const Home = () => {
   return (
     <div style={style}>
+      <NavigationBar />
       <h1>Home</h1>
       <Hotels />
     </div>

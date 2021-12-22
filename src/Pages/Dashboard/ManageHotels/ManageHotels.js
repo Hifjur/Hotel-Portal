@@ -1,22 +1,26 @@
-import { Button, Table, TableContainer, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Table,
+  TableContainer,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useAuth from "../../../../Hooks/useAuth";
-
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutlineOutlined } from "@mui/icons-material";
+import useAuth from "../../../Hooks/useAuth";
+import { DeleteForeverOutlined } from "@mui/icons-material";
 import { Box } from "@mui/system";
 
-const ManageAllOrders = () => {
+const ManageHotels = () => {
   const { token } = useAuth();
-  const [allOrders, setAllOrders] = useState([]);
+  const [allBikes, setAllBikes] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/bookings/admin", {
+    fetch("http://localhost:5000/hotels", {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -24,46 +28,21 @@ const ManageAllOrders = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setAllOrders(data);
+        setAllBikes(data);
       });
   }, [token, success]);
 
-  const handleShipping = (orderId) => {
+  const handleDelete = (id) => {
     setSucsess(false);
-    const id = { orderId };
-    fetch("http://localhost:5000/bookings/admin", {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(id),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          setSucsess(true);
-          console.log(data);
-        }
-      });
-  };
-
-  const handleDelete = (orderId) => {
-    setSucsess(false);
-    const id = { orderId };
     if (
-      window.confirm(
-        "Are you sure you want to delete this Order from database?"
-      )
+      window.confirm("Are you sure you want to delete this bike from database?")
     ) {
-      const url = `http://localhost:5000/bookings`;
+      const url = `http://localhost:5000/hotel/${id}`;
       fetch(url, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${token}`,
-          "content-type": "application/json",
         },
-        body: JSON.stringify(id),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -78,48 +57,37 @@ const ManageAllOrders = () => {
     }
   };
   return (
-    <div>
+    <>
       <Typography
         variant="h1"
         sx={{
+          width: "100%",
           fontWeight: 500,
-          fontSize: { xs: 50 },
           paddingY: "30px",
+          fontSize: { xs: "40px", md: "70px" },
           color: "white",
           backgroundColor: "#1D2440",
         }}
       >
-        MANAGE ALL Bookings
+        MANAGE ALL HOTELS
       </Typography>
       <Box sx={{ width: "100%", display: { xs: "none", md: "block" } }}>
         <TableContainer component={Paper}>
-          <Table sx={{}} aria-label="Appointments List">
+          <Table sx={{}} aria-label=" List">
             <TableHead>
               <TableRow>
-                <TableCell>Custormer</TableCell>
                 <TableCell align="right">Hotel Preview</TableCell>
-                <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Confirm</TableCell>
-                <TableCell align="right">Cancle</TableCell>
+                <TableCell align="right">Hotels</TableCell>
+                <TableCell align="right">Rent</TableCell>
+                <TableCell align="right">Remove Hotels</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {allOrders.map((row) => (
+              {allBikes.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    <span style={{ fontSize: "20px", color: "gray" }}>
-                      {row.customerName}
-                    </span>{" "}
-                    <br />
-                    <span style={{ color: "green" }}>
-                      Address: {row.road} {row.PO} <br /> {row.city} <br />{" "}
-                      Phone: {row.phone}
-                    </span>
-                  </TableCell>
                   <TableCell align="right">
                     <img
                       style={{
@@ -127,29 +95,20 @@ const ManageAllOrders = () => {
                         width: "125px",
                         borderRadius: "20px",
                       }}
-                      src={row.img}
+                      src={row.img1}
                       alt=""
                     />
                   </TableCell>
-                  <TableCell align="right">{row.productName}</TableCell>
-                  <TableCell align="right">{row.status}</TableCell>
+                  <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">$ {row.rent}</TableCell>
                   <TableCell align="right">
                     <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
-                      Mark as shipped
+                      <DeleteForeverOutlined></DeleteForeverOutlined>{" "}
                     </Button>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      onClick={() => handleDelete(row.orderId)}
-                      sx={{ backgroundColor: "#F27D42", m: 1 }}
-                      variant="contained"
-                    >
-                      <DeleteOutlineOutlined></DeleteOutlineOutlined>
-                    </Button>{" "}
                   </TableCell>
                 </TableRow>
               ))}
@@ -159,9 +118,9 @@ const ManageAllOrders = () => {
       </Box>
       <Box sx={{ width: "100%", display: { xs: "block", md: "none" } }}>
         <TableContainer component={Paper}>
-          <Table aria-label=" List">
+          <Table sx={{}} aria-label=" List">
             <TableBody>
-              {allOrders.map((row) => (
+              {allBikes.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{
@@ -170,32 +129,6 @@ const ManageAllOrders = () => {
                     gap: { xs: 1 },
                   }}
                 >
-                  <TableCell align="center" component="th" scope="row">
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        color: "gray",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Custormer's Name:
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        color: "black",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {" "}
-                      {row.customerName}
-                    </span>{" "}
-                    <br />
-                    <span style={{ color: "green" }}>
-                      Address: {row.road} {row.PO} <br />
-                      {row.city}
-                    </span>
-                  </TableCell>
                   <TableCell align="center">
                     <span
                       style={{
@@ -206,14 +139,14 @@ const ManageAllOrders = () => {
                     >
                       Hotel Preview
                     </span>{" "}
-                    <br />{" "}
+                    <br />
                     <img
                       style={{
                         height: "100px",
                         width: "125px",
                         borderRadius: "20px",
                       }}
-                      src={row.img}
+                      src={row.img1}
                       alt=""
                     />
                   </TableCell>
@@ -225,7 +158,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Name:
+                      Hotels:
                     </span>
                     <span
                       style={{
@@ -234,7 +167,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.productName}
+                      {row.name}
                     </span>
                   </TableCell>
                   <TableCell align="center">
@@ -245,7 +178,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Rent:
+                      Rent: $
                     </span>
                     <span
                       style={{
@@ -254,43 +187,16 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.price}
-                    </span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        color: "gray",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Status:
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "20px",
-                        color: "black",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {row.status}
+                      {row.rent}
                     </span>
                   </TableCell>
                   <TableCell align="center">
                     <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
-                      Mark as shipped
-                    </Button>
-                    <Button
-                      onClick={() => handleDelete(row.orderId)}
-                      sx={{ backgroundColor: "#F27D42", m: 1 }}
-                      variant="contained"
-                    >
-                      <DeleteOutlineOutlined></DeleteOutlineOutlined>
+                      <DeleteForeverOutlined></DeleteForeverOutlined>{" "}
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -299,8 +205,9 @@ const ManageAllOrders = () => {
           </Table>
         </TableContainer>
       </Box>
-    </div>
+      {success && <Alert severity="success">Deleted Successfully</Alert>}
+    </>
   );
 };
 
-export default ManageAllOrders;
+export default ManageHotels;
