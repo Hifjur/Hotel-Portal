@@ -5,11 +5,13 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
+import NavigationBar from "./Pages/Shared/NavigationBar/NavigationBar";
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
+        <NavigationBar></NavigationBar>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />

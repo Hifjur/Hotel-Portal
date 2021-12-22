@@ -12,6 +12,7 @@ import {
   getIdToken,
 } from "firebase/auth";
 import initializeFirebase from "../Pages/Login/Firebase/Firebase.init";
+import { useNavigate } from "react-router-dom";
 
 initializeFirebase();
 const useFirebase = () => {
@@ -20,7 +21,7 @@ const useFirebase = () => {
   const [error, setError] = useState("");
   const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
-
+  const path = useNavigate();
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
@@ -39,7 +40,7 @@ const useFirebase = () => {
         })
           .then(() => {})
           .catch((error) => {});
-        history.replace("/");
+        path("/");
       })
       .catch((error) => {
         setError(error.message);
@@ -53,7 +54,7 @@ const useFirebase = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const destination = location?.state?.from || "/";
-        history.replace(destination);
+        history(destination);
         setError("");
       })
       .catch((error) => {
