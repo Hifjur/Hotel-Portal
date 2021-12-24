@@ -69,10 +69,10 @@ const Book = () => {
     e.preventDefault();
     const bookings = {
       ...bookingInfo,
-      productName: name,
+      hotelName: name,
       productUniqueId: id,
       status: "pending",
-      price: rent,
+      rent: rent,
       img: img1,
       orderId: `${orderIdgenerator}`,
     };
@@ -87,7 +87,7 @@ const Book = () => {
       .then((data) => {
         if (data.insertedId) {
           setBookingComplete(true);
-          history("/payment");
+          history("/dashboard");
         }
       });
 
@@ -242,7 +242,7 @@ const Book = () => {
             type="submit"
             variant="contained"
           >
-            Payment
+            Book
           </Button>
         </form>
         <NavLink style={{ textDecoration: "none" }} to="/">

@@ -31,14 +31,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="payment"
-            element={
-              <PrivateRoute>
-                <Payment />
-              </PrivateRoute>
-            }
-          />
+
           <Route
             path="/dashboard"
             element={
@@ -56,6 +49,14 @@ function App() {
                 </PrivateRoute>
               }
             ></Route>
+            <Route
+              path="/dashboard/payment/:id"
+              element={
+                <PrivateRoute>
+                  <Payment />
+                </PrivateRoute>
+              }
+            />
             <Route
               path={`/dashboard/makeAdmin`}
               element={

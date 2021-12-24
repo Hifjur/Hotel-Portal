@@ -113,14 +113,21 @@ const AllBookings = () => {
                   <TableCell align="right">{row.price}</TableCell>
                   <TableCell align="right">{row.status}</TableCell>
                   <TableCell align="right">
-                    <NavLink style={{ textDecoration: "none" }} to="/payment">
-                      <Button
-                        sx={{ backgroundColor: "#F27D42", m: 1 }}
-                        variant="contained"
+                    {row.payment ? (
+                      "Paid"
+                    ) : (
+                      <NavLink
+                        style={{ textDecoration: "none" }}
+                        to={`/dashboard/payment/${row._id}`}
                       >
-                        Payment
-                      </Button>
-                    </NavLink>
+                        <Button
+                          sx={{ backgroundColor: "#F27D42", m: 1 }}
+                          variant="contained"
+                        >
+                          Payment
+                        </Button>
+                      </NavLink>
+                    )}
                   </TableCell>
                   <TableCell align="right">
                     <Button
