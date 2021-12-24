@@ -1,10 +1,11 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import Hotel from "./Hotel";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     fetch("http://localhost:5000/hotels")
       .then((res) => res.json())
@@ -13,27 +14,54 @@ const Hotels = () => {
         setHotels(data);
       });
   }, []);
+
   return (
     <>
-      {/* <NavigationBar></NavigationBar> */}
       <Container style={{ backgroundColor: "#1D2440" }}>
         <Typography
-          variant="h1"
+          variant="h6"
           sx={{
             fontWeight: 500,
-            paddingY: "30px",
-            fontSize: { xs: 40, md: 100 },
+            paddingY: "15px",
+            fontSize: { xs: 20, md: 30 },
             color: "white",
             marginTop: 3,
             backgroundColor: "#1D2440",
           }}
         >
-          HOTELS
+          Search for hotels
         </Typography>
+        <TextField
+          sx={{
+            width: "80%",
+            backgroundColor: "white",
+            color: "black",
+            marginY: 3,
+          }}
+          id="outlined-basic"
+          placeholder="Search by location or name"
+          variant="outlined"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
         <Grid container rowSpacing={3} columnSpacing={{ xs: 2, sm: 3, md: 4 }}>
-          {hotels.map((hotel) => (
-            <Hotel key={hotel._id} hotel={hotel}></Hotel>
-          ))}
+          {hotels
+            .filter((value) => {
+              if (search === "") {
+                return value;
+              } else if (
+                value.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                value.location
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
+              ) {
+                return value;
+              }
+            })
+            .map((hotel) => (
+              <Hotel key={hotel._id} hotel={hotel}></Hotel>
+            ))}
         </Grid>
       </Container>
     </>

@@ -61,29 +61,6 @@ const NavigationBar = () => {
           >
             Bikers Corner
           </Typography>
-          <NavLink
-            style={{
-              alignContent: "center",
-              m: 2,
-              display: { xs: "none", md: "inline" },
-              textDecoration: "none",
-              color: "white",
-            }}
-            to="/bikes"
-          >
-            <Button
-              sx={{
-                m: 2,
-                display: { xs: "none", md: "inline" },
-                backgroundColor: "#1D2440",
-                color: "#D3BDBD",
-              }}
-              variant="contained"
-              color="inherit"
-            >
-              Explore
-            </Button>
-          </NavLink>
 
           {user?.email ? (
             <Box>
