@@ -8,7 +8,6 @@ import {
   ImageList,
   ImageListItem,
 } from "@mui/material";
-import { width } from "@mui/system";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -174,6 +173,16 @@ const Book = () => {
             onBlur={handleOnBlur}
             label="Name"
             defaultValue={user.displayName}
+            id="filled-basic"
+            variant="filled"
+            size="small"
+          />
+          <TextField
+            sx={{ width: "70%", m: 1 }}
+            name="date"
+            onBlur={handleOnBlur}
+            label="Date"
+            placeholder="dd/mm/yyyy - dd/mm/yyyy"
             id="filled-basic"
             variant="filled"
             size="small"

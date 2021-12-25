@@ -1,0 +1,16 @@
+@import "react-slideshow-image/dist/styles.css";
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 800px;
+}
+
+.each-slide span {
+  padding: 20px;
+  font-size: 25px;
+  font-weight: 700;
+  background: #efefefa2;
+  text-align: center;
+}
