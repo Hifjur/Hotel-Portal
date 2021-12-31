@@ -45,7 +45,12 @@ const Hotels = () => {
             setSearch(e.target.value);
           }}
         />
-        <Grid container rowSpacing={3} columnSpacing={{ xs: 2, sm: 3, md: 4 }}>
+        <Grid
+          sx={{ paddingY: 10 }}
+          container
+          rowSpacing={3}
+          columnSpacing={{ xs: 2, sm: 3, md: 4 }}
+        >
           {hotels
             .filter((value) => {
               if (search === "") {

@@ -1,5 +1,7 @@
 import React from "react";
+import Footer from "../../Shared/Footer/Footer";
 import NavigationBar from "../../Shared/NavigationBar/NavigationBar";
+import Employee from "../Employee/Employee";
 
 import Hotels from "../Hotels/Hotels";
 import SlideShow from "../SlideShow/SlideShow";
@@ -14,6 +16,8 @@ const Home = () => {
       <NavigationBar />
       <SlideShow />
       <Hotels />
+      <Employee />
+      <Footer />
     </div>
   );
 };
