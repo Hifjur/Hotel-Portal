@@ -17,7 +17,7 @@ const AllBookings = () => {
   const [Bookings, setBookings] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    const url = `http://localhost:5000/bookings?email=${user.email}`;
+    const url = `https://serene-lake-86965.herokuapp.com/bookings?email=${user.email}`;
     fetch(url, {
       headers: {
         authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ const AllBookings = () => {
     if (
       window.confirm("Are you sure you want to delete this bike from database?")
     ) {
-      const url = `http://localhost:5000/bookings`;
+      const url = `https://serene-lake-86965.herokuapp.com/bookings`;
       fetch(url, {
         method: "DELETE",
         headers: {
@@ -74,9 +74,9 @@ const AllBookings = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Custormer's Name</TableCell>
-                <TableCell align="right">Product Preview</TableCell>
-                <TableCell align="right">Products</TableCell>
-                <TableCell align="right">Price</TableCell>
+                <TableCell align="right">Hotel Preview</TableCell>
+                <TableCell align="right">Hotel Name</TableCell>
+                <TableCell align="right">Rent</TableCell>
                 <TableCell align="right">Status</TableCell>
                 <TableCell align="right">Payment</TableCell>
                 <TableCell align="right">Cancle</TableCell>
@@ -109,8 +109,8 @@ const AllBookings = () => {
                       alt=""
                     />
                   </TableCell>
-                  <TableCell align="right">{row.productName}</TableCell>
-                  <TableCell align="right">{row.price}</TableCell>
+                  <TableCell align="right">{row.hotelName}</TableCell>
+                  <TableCell align="right">${row.rent}</TableCell>
                   <TableCell align="right">{row.status}</TableCell>
                   <TableCell align="right">
                     {row.payment ? (
@@ -191,7 +191,7 @@ const AllBookings = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Product Preview
+                      Hotel Preview
                     </span>{" "}
                     <br />{" "}
                     <img
@@ -212,7 +212,7 @@ const AllBookings = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Products:
+                      Hotels:
                     </span>
                     <span
                       style={{
@@ -221,7 +221,7 @@ const AllBookings = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.productName}
+                      {row.hotelName}
                     </span>
                   </TableCell>
                   <TableCell align="center">
@@ -232,7 +232,7 @@ const AllBookings = () => {
                         fontWeight: 500,
                       }}
                     >
-                      Price:
+                      Rent:
                     </span>
                     <span
                       style={{
@@ -241,7 +241,7 @@ const AllBookings = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.price}
+                      {row.rent}
                     </span>
                   </TableCell>
                   <TableCell align="center">

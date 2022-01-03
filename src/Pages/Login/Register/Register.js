@@ -37,11 +37,14 @@ const Register = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid sx={{ mt: 8 }} item xs={12} md={12}>
-          <Typography variant="h2" gutterBottom>
+          <Typography sx={{ paddingTop: 16 }} variant="h2" gutterBottom>
             Register
           </Typography>
           {!isLoading && (
-            <form style={{ height: "400px" }} onSubmit={handleLoginSubmit}>
+            <form
+              style={{ paddingTop: "120px", paddingBottom: "80px" }}
+              onSubmit={handleLoginSubmit}
+            >
               <TextField
                 sx={{ width: "75%", m: 1 }}
                 id="standard-basic"
@@ -90,7 +93,9 @@ const Register = () => {
               </Button>{" "}
               <br />
               <NavLink style={{ textDecoration: "none" }} to="/login">
-                <Button variant="text">Already registered? Please login</Button>
+                <Button sx={{ paddingTop: 5 }} variant="text">
+                  Already registered? Please login
+                </Button>
               </NavLink>
             </form>
           )}
@@ -111,7 +116,7 @@ const Register = () => {
             <Button
               sx={{
                 marginY: 2,
-                padding: 2,
+                padding: 3,
                 backgroundColor: "#F27D42",
                 color: "whtie",
               }}

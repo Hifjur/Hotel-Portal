@@ -12,19 +12,39 @@ const Payment = () => {
   const { id } = useParams();
   const [bookings, setBookings] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/bookings/${id}`)
+    fetch(`https://serene-lake-86965.herokuapp.com/bookings/${id}`)
       .then((res) => res.json())
-      .then((data) => setBookings(data));
+      .then((data) => {
+        console.log(data);
+        setBookings(data);
+      });
   }, [id]);
   return (
-    <div>
-      <h2>Pay for: {bookings.hotelName} </h2>
-      <h2>Pay: ${bookings.rent} </h2>
+    <div
+      style={{
+        paddingTop: "120px",
+        paddingBottom: "120px",
+        backgroundColor: "#1D2440",
+        color: "white",
+        borderRadius: 20,
+      }}
+    >
+      <img
+        style={{ border: "6px solid white", borderRadius: 20 }}
+        src={bookings.img}
+        alt=""
+      />
+      <h1>{bookings.hotelName} </h1>
+      <h2>Rent ${bookings.rent}</h2>
+
       {bookings.rent && (
         <Elements stripe={stripePromise}>
           <CheckoutForm bookings={bookings}></CheckoutForm>
         </Elements>
       )}
+      <p style={{ color: "gray", fontSize: 20 }}>
+        Test Card Number for Demo only 4242424242424242
+      </p>
     </div>
   );
 };

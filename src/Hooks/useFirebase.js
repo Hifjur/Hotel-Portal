@@ -71,7 +71,7 @@ const useFirebase = () => {
         setError("");
         saveUser(user.email, user.displayName, "PUT");
         const destination = location?.state?.from || "/";
-        history.replace(destination);
+        history(destination);
       })
       .catch((error) => {
         setError(error.message);
@@ -94,7 +94,7 @@ const useFirebase = () => {
   }, [auth]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://serene-lake-86965.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setAdmin(data.admin));
   }, [user.email]);
@@ -113,7 +113,7 @@ const useFirebase = () => {
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
     console.log(user);
-    fetch("http://localhost:5000/users", {
+    fetch("https://serene-lake-86965.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",

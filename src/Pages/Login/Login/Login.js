@@ -38,10 +38,13 @@ const Login = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid sx={{ mt: 8 }} item xs={12} md={12}>
-          <Typography variant="h2" gutterBottom>
-            Login
+          <Typography sx={{ paddingTop: 16 }} variant="h2" gutterBottom>
+            Login Here!!
           </Typography>
-          <form style={{ hight: "500px" }} onSubmit={handleLoginSubmit}>
+          <form
+            style={{ paddingTop: "120px", paddingBottom: "120px" }}
+            onSubmit={handleLoginSubmit}
+          >
             <TextField
               sx={{ width: "75%", m: 1 }}
               id="standard-basic"
@@ -98,7 +101,7 @@ const Login = () => {
           >
             <Button
               sx={{
-                marginY: 2,
+                marginY: 5,
                 padding: 2,
                 backgroundColor: "#F27D42",
                 color: "whtie",

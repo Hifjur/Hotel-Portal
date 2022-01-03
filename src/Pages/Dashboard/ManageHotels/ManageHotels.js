@@ -20,7 +20,7 @@ const ManageHotels = () => {
   const [allBikes, setAllBikes] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/hotels", {
+    fetch("https://serene-lake-86965.herokuapp.com/hotels", {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -37,7 +37,7 @@ const ManageHotels = () => {
     if (
       window.confirm("Are you sure you want to delete this bike from database?")
     ) {
-      const url = `http://localhost:5000/hotel/${id}`;
+      const url = `https://serene-lake-86965.herokuapp.com/hotel/${id}`;
       fetch(url, {
         method: "DELETE",
         headers: {

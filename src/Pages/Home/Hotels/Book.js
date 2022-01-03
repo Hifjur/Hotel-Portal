@@ -29,7 +29,7 @@ const Book = () => {
 
   const [hotel, setHotel] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/hotels/${id}`)
+    fetch(`https://serene-lake-86965.herokuapp.com/hotels/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -75,7 +75,7 @@ const Book = () => {
       img: img1,
       orderId: `${orderIdgenerator}`,
     };
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://serene-lake-86965.herokuapp.com/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

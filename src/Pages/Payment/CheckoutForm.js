@@ -15,7 +15,7 @@ const CheckoutForm = ({ bookings }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://serene-lake-86965.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -74,7 +74,7 @@ const CheckoutForm = ({ bookings }) => {
         created: paymentIntent.created,
         last4: paymentMethod.card.last4,
       };
-      const url = `http://localhost:5000/bookings/${_id}`;
+      const url = `https://serene-lake-86965.herokuapp.com/bookings/${_id}`;
       fetch(url, {
         method: "PUT",
         headers: {

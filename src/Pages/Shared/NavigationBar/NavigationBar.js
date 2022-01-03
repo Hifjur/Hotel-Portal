@@ -82,7 +82,7 @@ const NavigationBar = () => {
               color: "#1D2440",
             }}
           >
-            Bikers Corner
+            Hotel Portal
           </Typography>
 
           {user?.email ? (

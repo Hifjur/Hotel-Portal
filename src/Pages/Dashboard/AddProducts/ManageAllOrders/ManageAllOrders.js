@@ -16,9 +16,9 @@ const ManageAllOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/bookings/admin", {
+    fetch("https://serene-lake-86965.herokuapp.com/bookings/admin", {
       headers: {
-        authorization: `Bearer ${token}`,
+        'authorization': `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
@@ -31,10 +31,10 @@ const ManageAllOrders = () => {
   const handleShipping = (orderId) => {
     setSucsess(false);
     const id = { orderId };
-    fetch("http://localhost:5000/bookings/admin", {
+    fetch("https://serene-lake-86965.herokuapp.com/bookings/admin", {
       method: "PUT",
       headers: {
-        authorization: `Bearer ${token}`,
+        'authorization': `Bearer ${token}`,
         "content-type": "application/json",
       },
       body: JSON.stringify(id),
@@ -56,11 +56,11 @@ const ManageAllOrders = () => {
         "Are you sure you want to delete this Order from database?"
       )
     ) {
-      const url = `http://localhost:5000/bookings`;
+      const url = `https://serene-lake-86965.herokuapp.com/bookings`;
       fetch(url, {
         method: "DELETE",
         headers: {
-          authorization: `Bearer ${token}`,
+          'authorization': `Bearer ${token}`,
           "content-type": "application/json",
         },
         body: JSON.stringify(id),
