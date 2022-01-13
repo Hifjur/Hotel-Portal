@@ -17,7 +17,7 @@ import { Box } from "@mui/system";
 
 const ManageHotels = () => {
   const { token } = useAuth();
-  const [allBikes, setAllBikes] = useState([]);
+  const [allHotels, setAllHotesl] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
     fetch("https://serene-lake-86965.herokuapp.com/hotels", {
@@ -28,7 +28,7 @@ const ManageHotels = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setAllBikes(data);
+        setAllHotesl(data);
       });
   }, [token, success]);
 
@@ -83,7 +83,7 @@ const ManageHotels = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {allBikes.map((row) => (
+              {allHotels.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -120,7 +120,7 @@ const ManageHotels = () => {
         <TableContainer component={Paper}>
           <Table sx={{}} aria-label=" List">
             <TableBody>
-              {allBikes.map((row) => (
+              {allHotels.map((row) => (
                 <TableRow
                   key={row._id}
                   sx={{

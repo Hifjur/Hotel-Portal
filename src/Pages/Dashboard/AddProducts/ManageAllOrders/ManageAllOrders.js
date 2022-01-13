@@ -16,10 +16,10 @@ const ManageAllOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
   const [success, setSucsess] = useState(false);
   useEffect(() => {
-    fetch("https://serene-lake-86965.herokuapp.com/bookings/admin", {
+    fetch("https://serene-lake-86965.herokuapp.com/allbookins", {
       headers: {
-        'authorization': `Bearer ${token}`,
-      },
+        authorization: `Bearer ${token}`
+      }
     })
       .then((res) => res.json())
       .then((data) => {
