@@ -35,7 +35,7 @@ const ManageHotels = () => {
   const handleDelete = (id) => {
     setSucsess(false);
     if (
-      window.confirm("Are you sure you want to delete this bike from database?")
+      window.confirm("Are you sure you want to delete this Hotel from database?")
     ) {
       const url = `https://serene-lake-86965.herokuapp.com/hotel/${id}`;
       fetch(url, {

@@ -28,10 +28,10 @@ const ManageAllOrders = () => {
       });
   }, [token, success]);
 
-  const handleShipping = (orderId) => {
+  const handleShipping = (_id) => {
     setSucsess(false);
-    const id = { orderId };
-    fetch("https://serene-lake-86965.herokuapp.com/bookings/admin", {
+    const id = { _id };
+    fetch("http://localhost:5000/bookings/admin", {
       method: "PUT",
       headers: {
         'authorization': `Bearer ${token}`,
@@ -48,12 +48,12 @@ const ManageAllOrders = () => {
       });
   };
 
-  const handleDelete = (orderId) => {
+  const handleDelete = (_id) => {
     setSucsess(false);
-    const id = { orderId };
+    const id = { _id };
     if (
       window.confirm(
-        "Are you sure you want to delete this Order from database?"
+        "Are you sure you want to delete this Booking from database?"
       )
     ) {
       const url = `https://serene-lake-86965.herokuapp.com/bookings`;
@@ -100,7 +100,7 @@ const ManageAllOrders = () => {
                 <TableCell align="right">Hotel Preview</TableCell>
                 <TableCell align="right">Name</TableCell>
                 <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Confirm</TableCell>
+                {/* <TableCell align="right">Confirm</TableCell> */}
                 <TableCell align="right">Cancle</TableCell>
               </TableRow>
             </TableHead>
@@ -131,20 +131,20 @@ const ManageAllOrders = () => {
                       alt=""
                     />
                   </TableCell>
-                  <TableCell align="right">{row.productName}</TableCell>
+                  <TableCell align="right">{row.hotelName}</TableCell>
                   <TableCell align="right">{row.status}</TableCell>
-                  <TableCell align="right">
+                  {/* <TableCell align="right">
                     <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
+                      onClick={() => handleShipping(`${row._id}`)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
                       Mark as shipped
                     </Button>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="right">
                     <Button
-                      onClick={() => handleDelete(row.orderId)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
@@ -234,7 +234,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.productName}
+                      {row.hotelName}
                     </span>
                   </TableCell>
                   <TableCell align="center">
@@ -254,7 +254,7 @@ const ManageAllOrders = () => {
                         fontWeight: 500,
                       }}
                     >
-                      {row.price}
+                      ${row.rent}
                     </span>
                   </TableCell>
                   <TableCell align="center">
@@ -277,22 +277,22 @@ const ManageAllOrders = () => {
                       {row.status}
                     </span>
                   </TableCell>
-                  <TableCell align="center">
+                  {/* <TableCell align="center">
                     <Button
-                      onClick={() => handleShipping(`${row.orderId}`)}
+                      onClick={() => handleShipping(`${row._id}`)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
                       Mark as shipped
                     </Button>
                     <Button
-                      onClick={() => handleDelete(row.orderId)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
                       <DeleteOutlineOutlined></DeleteOutlineOutlined>
                     </Button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
