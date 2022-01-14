@@ -27,11 +27,11 @@ const AllBookings = () => {
       .then((data) => setBookings(data));
   }, [user.email, token, success]);
 
-  const handleDelete = (orderId) => {
+  const handleDelete = (_id) => {
     setSucsess(false);
-    const id = { orderId };
+    const id = {_id };
     if (
-      window.confirm("Are you sure you want to delete this bike from database?")
+      window.confirm("Are you sure you want to Cancle this booking?")
     ) {
       const url = `https://serene-lake-86965.herokuapp.com/bookings`;
       fetch(url, {
@@ -131,7 +131,7 @@ const AllBookings = () => {
                   </TableCell>
                   <TableCell align="right">
                     <Button
-                      onClick={() => handleDelete(row.orderId)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
@@ -274,7 +274,7 @@ const AllBookings = () => {
                       </Button>
                     </NavLink>
                     <Button
-                      onClick={() => handleDelete(row.orderId)}
+                      onClick={() => handleDelete(row._id)}
                       sx={{ backgroundColor: "#F27D42", m: 1 }}
                       variant="contained"
                     >
